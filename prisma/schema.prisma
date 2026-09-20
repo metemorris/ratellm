@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Model {
+  id          String   @id // Hugging Face repo id, e.g. "mistralai/Mistral-7B-Instruct-v0.3"
+  author      String?
+  downloads   Int      @default(0)
+  likes       Int      @default(0)
+  pipelineTag String?
+  libraryName String?
+  tags        String   @default("[]") // JSON-encoded string array
+  description String?
+  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now())
+  reviews     Review[]
+
+  @@index([downloads])
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  modelId    String
+  model      Model    @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  rating     Int // 1-5 overall
+  title      String?
+  body       String
+  author     String   @default("Anonymous")
+  useCase    String // primary use case key
+  contexts   String   @default("[]") // JSON-encoded string array of context keys
+  dimensions String   @default("{}") // JSON-encoded { speed, quality, cost, ease } 1-5
+  deployment String? // "local" | "provider" | "both"
+  hardware   String? // free text when running locally
+  projectType String? // "personal" | "startup" | "enterprise" | ...
+  createdAt  DateTime @default(now())
+
+  @@index([modelId, createdAt])
+}

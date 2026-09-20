@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "ratellm — AI model reviews",
+  "version": "0.1.0",
+  "description": "See and leave reviews for Hugging Face models while you browse.",
+  "content_scripts": [
+    {
+      "matches": ["https://huggingface.co/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
