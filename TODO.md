@@ -35,7 +35,7 @@ Add a way to confirm a reviewer is human, while still allowing anonymous reviews
 - [ ] **Error monitoring** — Sentry or similar.
 - [ ] **Tests** — unit tests (survey/format/reviews libs), component tests, E2E for
       the review flow.
-- [ ] **CI/CD** — lint + typecheck + tests on every PR.
+- [x] **CI/CD** — lint + typecheck + build on every PR (`.github/workflows/ci.yml`).
 - [ ] **Content/legal** — terms of service, privacy policy, moderation guidelines.
 - [ ] **Performance** — font/image optimization, bundle review, Lighthouse pass.
 - [ ] **Accessibility** — keyboard navigation, focus states, contrast in both themes.

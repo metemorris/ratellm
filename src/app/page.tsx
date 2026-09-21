@@ -3,6 +3,9 @@ import { ModelCard } from "@/components/ModelCard";
 import { getPopularModels } from "@/lib/hf";
 import { getRatingCounts } from "@/lib/reviews";
 
+// Live data — render at request time so the build doesn't need a DB or network.
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const models = await getPopularModels(12).catch(() => []);
   const ratings = await getRatingCounts(models.map((m) => m.id));
